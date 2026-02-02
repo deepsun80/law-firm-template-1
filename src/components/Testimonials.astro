@@ -2,6 +2,63 @@
 
 ---
 
-<section class="testimonials" id="testimonials"></section>
+<section class="testimonials" id="testimonials">
+  <div class="testimonials__container container">
+    <h2 class="testimonials__title">What Our Clients Say</h2>
+    <div class="testimonials__card">
+      <blockquote class="testimonials__quote">
+        "Capitol Shield changed our lives after my accident. Their dedication and local knowledge were incredible."
+      </blockquote>
+      <p class="testimonials__author">- Jane D., Austin Resident</p>
+    </div>
+  </div>
+</section>
 
-<style></style>
+<style>
+  .testimonials {
+    background-color: var(--color-blue);
+    padding: 64px 0;
+  }
+
+  .testimonials__title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--color-white);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .testimonials__card {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .testimonials__quote {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--color-white);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .testimonials__author {
+    font-size: 0.95rem;
+    color: var(--color-gold);
+  }
+
+  @media (min-width: 768px) {
+    .testimonials {
+      padding: 80px 0;
+    }
+
+    .testimonials__title {
+      font-size: 1.75rem;
+    }
+
+    .testimonials__quote {
+      font-size: 1.25rem;
+    }
+  }
+</style>

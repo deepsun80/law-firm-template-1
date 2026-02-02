@@ -2,6 +2,305 @@
 
 ---
 
-<section class="hero" id="hero"></section>
+<section class="hero" id="hero">
+  <div class="hero__container container">
+    <div class="hero__frame">
+      <!-- Side borders (animated) -->
+      <div class="hero__border-left"></div>
+      <div class="hero__border-right"></div>
 
-<style></style>
+      <!-- Blue background at bottom -->
+      <div class="hero__bg-blue"></div>
+
+      <!-- Content -->
+      <div class="hero__content">
+        <h1
+          class="hero__title"
+          id="hero-title"
+          data-text="Defending Austin's Injured."
+        >
+        </h1>
+        <p class="hero__subtitle">Restoring Your Future.</p>
+
+        <div class="hero__image-container">
+          <img
+            src="/austin-pennybacker-bridge.webp"
+            alt="Austin Pennybacker Bridge at sunset"
+            class="hero__image"
+            width="1920"
+            height="1080"
+            loading="eager"
+            fetchpriority="high"
+          />
+          <div class="hero__image-overlay">
+            <p class="hero__image-text">
+              The strategic advocacy 500+ local families trust when it matters
+              most.
+            </p>
+            <a href="#contact" class="hero__cta">Free Consultation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Typewriter effect
+  const title = document.getElementById('hero-title');
+  const text = title?.dataset.text || '';
+  let index = 0;
+
+  function typeWriter() {
+    if (index < text.length) {
+      title!.textContent = text.slice(0, index + 1);
+      index++;
+      setTimeout(typeWriter, 50);
+    }
+  }
+
+  // Start typewriter aligned with other animations
+  setTimeout(typeWriter, 200);
+</script>
+
+<style>
+  .hero {
+    background-color: var(--color-white);
+    padding-top: var(--header-height);
+  }
+
+  .hero__container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  /* Frame - no border, we use pseudo-elements for animated borders */
+  .hero__frame {
+    position: relative;
+    background-color: var(--color-white);
+    overflow: hidden;
+    border-bottom: 2px solid var(--color-gold);
+  }
+
+  /* Animated side borders */
+  .hero__border-left,
+  .hero__border-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #d1d5db;
+    transform: scaleY(0);
+    transform-origin: top;
+    animation: sideBorderGrow 0.6s ease-out 0.7s forwards;
+  }
+
+  .hero__border-left {
+    left: 0;
+  }
+
+  .hero__border-right {
+    right: 0;
+  }
+
+  @keyframes sideBorderGrow {
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  /* Blue background at bottom - straight left, rounded right */
+  .hero__bg-blue {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 28%;
+    background-color: var(--color-blue);
+    border-radius: 0 100px 0 0;
+    z-index: 0;
+  }
+
+  /* Content */
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    padding: 40px 24px 48px;
+    text-align: center;
+  }
+
+  .hero__title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 6vw, 3.75rem);
+    font-weight: 700;
+    color: var(--color-slate);
+    line-height: 1.15;
+    margin-bottom: 12px;
+    min-height: 1.15em;
+  }
+
+  .hero__subtitle {
+    font-family: var(--font-sans);
+    font-size: clamp(1.1rem, 3vw, 1.7rem);
+    color: var(--color-gold);
+    font-style: italic;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out 1.8s forwards;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Image */
+  .hero__image-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 24px 24px 0 0;
+    overflow: hidden;
+    box-shadow: 0 -5px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .hero__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transform: scale(1.1);
+    animation: imageZoom 1.8s ease-out 0.2s forwards;
+  }
+
+  @keyframes imageZoom {
+    to {
+      transform: scale(1);
+    }
+  }
+
+  /* Image overlay content */
+  .hero__image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 24px 20px;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.6) 0%,
+      transparent 100%
+    );
+    text-align: center;
+  }
+
+  .hero__image-text {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    color: var(--color-white);
+    line-height: 1.5;
+    max-width: 400px;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out 2s forwards;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 12px 28px;
+    background-color: var(--color-gold);
+    color: var(--color-slate);
+    border-radius: 4px;
+    transition:
+      background-color var(--transition-speed) ease,
+      transform var(--transition-speed) ease;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out 2.2s forwards;
+  }
+
+  .hero__cta:hover {
+    background-color: var(--color-gold-hover);
+    transform: translateY(-2px);
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    .hero__content {
+      padding: 56px 40px 64px;
+    }
+
+    .hero__subtitle {
+      margin-bottom: 40px;
+    }
+
+    .hero__image-container {
+      border-radius: 32px 32px 0 0;
+    }
+
+    .hero__bg-blue {
+      height: 32%;
+      border-radius: 0 140px 0 0;
+    }
+
+    .hero__image-overlay {
+      padding: 32px 24px;
+    }
+
+    .hero__image-text {
+      font-size: 1.5rem;
+      max-width: 450px;
+      margin-bottom: 20px;
+    }
+
+    .hero__cta {
+      font-size: 0.95rem;
+      padding: 14px 32px;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .hero__content {
+      padding: 64px 56px 72px;
+    }
+
+    .hero__subtitle {
+      margin-bottom: 24px;
+    }
+
+    .hero__image-container {
+      max-width: 1100px;
+      border-radius: 40px 40px 0 0;
+    }
+
+    .hero__bg-blue {
+      height: 35%;
+      border-radius: 0 180px 0 0;
+    }
+
+    .hero__image-overlay {
+      padding: 100px 32px;
+    }
+
+    .hero__image-text {
+      max-width: 500px;
+      margin-bottom: 24px;
+    }
+
+    .hero__cta {
+      font-size: 1rem;
+      padding: 16px 40px;
+    }
+  }
+</style>

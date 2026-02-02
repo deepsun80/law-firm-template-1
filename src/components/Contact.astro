@@ -2,6 +2,123 @@
 
 ---
 
-<section class="contact" id="contact"></section>
+<section class="contact" id="contact">
+  <div class="contact__container container">
+    <h2 class="contact__title">Contact</h2>
+    <div class="contact__grid">
+      <div class="contact__info">
+        <h3 class="contact__subtitle">The Three Pillars of Your Defense</h3>
+        <ul class="contact__list">
+          <li>100% Focused on You</li>
+          <li>No Win No Fee</li>
+          <li>Local Austin Roots</li>
+        </ul>
+      </div>
+      <form class="contact__form">
+        <input type="text" placeholder="Name" class="contact__input" />
+        <input type="email" placeholder="Email" class="contact__input" />
+        <input type="tel" placeholder="Phone" class="contact__input" />
+        <textarea placeholder="Message" class="contact__textarea" rows="4"></textarea>
+        <button type="submit" class="contact__submit">Submit Case</button>
+      </form>
+    </div>
+  </div>
+</section>
 
-<style></style>
+<style>
+  .contact {
+    background-color: var(--color-light-gray);
+    padding: 64px 0;
+  }
+
+  .contact__title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--color-slate);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .contact__grid {
+    display: grid;
+    gap: 40px;
+  }
+
+  .contact__subtitle {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-slate);
+    margin-bottom: 20px;
+  }
+
+  .contact__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contact__list li {
+    font-size: 0.95rem;
+    color: var(--color-slate);
+  }
+
+  .contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact__input,
+  .contact__textarea {
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 14px 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color var(--transition-speed) ease;
+  }
+
+  .contact__input:focus,
+  .contact__textarea:focus {
+    border-color: var(--color-gold);
+  }
+
+  .contact__textarea {
+    resize: vertical;
+  }
+
+  .contact__submit {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 14px 32px;
+    background-color: var(--color-gold);
+    color: var(--color-slate);
+    border-radius: 4px;
+    transition:
+      background-color var(--transition-speed) ease,
+      transform var(--transition-speed) ease;
+  }
+
+  .contact__submit:hover {
+    background-color: var(--color-gold-hover);
+    transform: translateY(-1px);
+  }
+
+  @media (min-width: 768px) {
+    .contact {
+      padding: 80px 0;
+    }
+
+    .contact__title {
+      font-size: 1.75rem;
+    }
+
+    .contact__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+  }
+</style>

@@ -2,6 +2,85 @@
 
 ---
 
-<section class="practice-areas" id="practice-areas"></section>
+<section class="practice" id="expertise">
+  <div class="practice__container container">
+    <h2 class="practice__title">Our Expertise in Your Defense</h2>
+    <div class="practice__grid">
+      <div class="practice__card">
+        <h3 class="practice__card-title">Medical Negligence</h3>
+        <p class="practice__card-text">
+          Placeholder text for medical negligence practice area description.
+        </p>
+      </div>
+      <div class="practice__card">
+        <h3 class="practice__card-title">Work Injuries</h3>
+        <p class="practice__card-text">
+          Placeholder text for work injuries practice area description.
+        </p>
+      </div>
+      <div class="practice__card">
+        <h3 class="practice__card-title">Auto Accidents</h3>
+        <p class="practice__card-text">
+          Placeholder text for auto accidents practice area description.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<style></style>
+<style>
+  .practice {
+    background-color: var(--color-light-gray);
+    padding: 64px 0;
+  }
+
+  .practice__title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--color-slate);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .practice__grid {
+    display: grid;
+    gap: 24px;
+  }
+
+  .practice__card {
+    background-color: var(--color-white);
+    padding: 32px 24px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .practice__card-title {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--color-slate);
+    margin-bottom: 12px;
+  }
+
+  .practice__card-text {
+    font-size: 0.9rem;
+    color: var(--color-slate);
+    opacity: 0.8;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 768px) {
+    .practice {
+      padding: 80px 0;
+    }
+
+    .practice__title {
+      font-size: 1.75rem;
+    }
+
+    .practice__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+  }
+</style>

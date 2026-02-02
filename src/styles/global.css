@@ -1,24 +1,27 @@
 /* ===== CSS Custom Properties ===== */
 :root {
-  --color-slate: #2a3f52;
-  --color-teal: #0097a7;
-  --color-gold: #f5ad19;
-  --color-gold-hover: #d4941c;
+  --color-slate: #1d2b38;
+  --color-blue: #00243e;
+  --color-gold: #debb39;
+  --color-gold-hover: #ab8f2b;
   --color-white: #ffffff;
   --color-light-gray: #f5f7f9;
 
-  --font-heading: 'Roboto Condensed', sans-serif;
-  --font-body: 'Roboto', sans-serif;
+  --font-cursive: 'Allura', cursive;
+  --font-sans: 'Roboto', sans-serif;
+  --font-serif: 'Libre Baskerville', serif;
 
-  --header-height: 100px;
-  --header-height-scrolled: 70px;
+  --header-height: 80px;
+  --header-height-scrolled: 64px;
 
-  --max-width: 1280px;
+  --max-width: 1440px;
   --transition-speed: 0.3s;
 }
 
 /* ===== CSS Reset & Base ===== */
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -29,33 +32,52 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   color: var(--color-slate);
+  line-height: 1.6;
   overflow-x: hidden;
-  padding-top: 70px; /* Mobile header height */
 }
 
-/* Utility classes */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ===== Utility Classes ===== */
 .container {
+  width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 20px;
 }
 
-/* Tablet */
 @media (min-width: 768px) {
-  body {
-    padding-top: 90px;
-  }
-
   .container {
-    padding: 0 24px;
+    padding: 0 32px;
   }
 }
 
-/* Desktop */
 @media (min-width: 1024px) {
-  body {
-    padding-top: var(--header-height);
+  :root {
+    --header-height: 100px;
+    --header-height-scrolled: 70px;
   }
 }

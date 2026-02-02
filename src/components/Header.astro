@@ -2,6 +2,399 @@
 
 ---
 
-<header class="header" id="header"></header>
+<header class="header" id="header">
+  <div class="header__container container">
+    <nav class="header__nav-left">
+      <a href="#hero" class="header__link">Home</a>
+      <a href="#expertise" class="header__link">Expertise</a>
+      <a href="#results" class="header__link">Results</a>
+    </nav>
 
-<style></style>
+    <a href="/" class="header__logo">
+      <img
+        src="/capitol-shield-logo-color.webp"
+        alt="Capitol Shield Law Group"
+        width="180"
+        height="60"
+      />
+    </a>
+
+    <nav class="header__nav-right">
+      <a href="#contact" class="header__link">Get Help</a>
+      <a href="tel:5124567890" class="header__phone">
+        <svg
+          class="header__phone-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+          ></path>
+        </svg>
+        <span>512-456-7890</span>
+      </a>
+    </nav>
+
+    <button
+      class="header__hamburger"
+      id="hamburger"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="header__hamburger-line"></span>
+      <span class="header__hamburger-line"></span>
+      <span class="header__hamburger-line"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu__content">
+    <nav class="mobile-menu__nav">
+      <a href="#hero" class="mobile-menu__link">Home</a>
+      <a href="#expertise" class="mobile-menu__link">Expertise</a>
+      <a href="#results" class="mobile-menu__link">Results</a>
+      <a href="#contact" class="mobile-menu__link">Get Help</a>
+      <a href="tel:5124567890" class="mobile-menu__phone">
+        <svg
+          class="mobile-menu__phone-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+          ></path>
+        </svg>
+        <span>512-456-7890</span>
+      </a>
+    </nav>
+  </div>
+</div>
+
+<script>
+  const header = document.getElementById('header');
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll(
+    '.mobile-menu__link, .mobile-menu__phone',
+  );
+
+  let isScrolled = false;
+  let ticking = false;
+
+  function updateHeader() {
+    const scrollY = window.scrollY;
+    const shouldBeScrolled = scrollY > 80;
+
+    if (shouldBeScrolled !== isScrolled) {
+      isScrolled = shouldBeScrolled;
+      header?.classList.toggle('header--scrolled', isScrolled);
+    }
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(updateHeader);
+      ticking = true;
+    }
+  }
+
+  function toggleMenu() {
+    const isOpen = mobileMenu?.classList.toggle('mobile-menu--open');
+    hamburger?.classList.toggle('header__hamburger--open', isOpen);
+    hamburger?.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  function closeMenu() {
+    mobileMenu?.classList.remove('mobile-menu--open');
+    hamburger?.classList.remove('header__hamburger--open');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  hamburger?.addEventListener('click', toggleMenu);
+  mobileLinks.forEach((link) => link.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: var(--header-height);
+    background-color: var(--color-white);
+    transition: height var(--transition-speed) ease;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: calc(100% - 40px);
+    max-width: calc(var(--max-width) - 40px);
+    height: 2px;
+    background-color: #d1d5db;
+    animation: headerBorderExpand 0.8s ease-out 0.2s forwards;
+  }
+
+  @keyframes headerBorderExpand {
+    to {
+      transform: translateX(-50%) scaleX(1);
+    }
+  }
+
+  .header--scrolled {
+    height: var(--header-height-scrolled);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .header--scrolled::after {
+    opacity: 0;
+  }
+
+  .header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+  }
+
+  /* Navigation */
+  .header__nav-left,
+  .header__nav-right {
+    display: none;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .header__link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-slate);
+    transition: color var(--transition-speed) ease;
+  }
+
+  .header__link:hover {
+    color: var(--color-gold-hover);
+  }
+
+  /* Phone */
+  .header__phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-gold);
+    transition: color var(--transition-speed) ease;
+  }
+
+  .header__phone:hover {
+    color: var(--color-gold-hover);
+  }
+
+  .header__phone-icon {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+  }
+
+  /* Logo */
+  .header__logo {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 50%);
+    z-index: 10;
+    background-color: var(--color-white);
+    padding: 12px 24px;
+    transition:
+      transform var(--transition-speed) ease,
+      bottom var(--transition-speed) ease,
+      padding var(--transition-speed) ease;
+  }
+
+  .header__logo img {
+    height: 50px;
+    width: auto;
+    transition: height var(--transition-speed) ease;
+  }
+
+  .header--scrolled .header__logo {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+    padding: 8px 16px;
+  }
+
+  .header--scrolled .header__logo img {
+    height: 36px;
+  }
+
+  /* Hamburger */
+  .header__hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 28px;
+    height: 28px;
+    z-index: 10;
+  }
+
+  .header__hamburger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-slate);
+    border-radius: 2px;
+    transition:
+      transform var(--transition-speed) ease,
+      opacity var(--transition-speed) ease;
+  }
+
+  .header__hamburger--open .header__hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .header__hamburger--open .header__hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header__hamburger--open .header__hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile Menu Overlay */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.98);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--transition-speed) ease,
+      visibility var(--transition-speed) ease;
+  }
+
+  .mobile-menu--open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu__content {
+    transform: translateY(20px);
+    transition: transform var(--transition-speed) ease;
+  }
+
+  .mobile-menu--open .mobile-menu__content {
+    transform: translateY(0);
+  }
+
+  .mobile-menu__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .mobile-menu__link {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--color-slate);
+    transition: color var(--transition-speed) ease;
+  }
+
+  .mobile-menu__link:hover {
+    color: var(--color-gold-hover);
+  }
+
+  .mobile-menu__phone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--color-gold);
+    transition: color var(--transition-speed) ease;
+  }
+
+  .mobile-menu__phone:hover {
+    color: var(--color-gold-hover);
+  }
+
+  .mobile-menu__phone-icon {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+  }
+
+  @media (min-width: 768px) {
+    .header::after {
+      width: calc(100% - 64px);
+      max-width: calc(var(--max-width) - 64px);
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .header__nav-left,
+    .header__nav-right {
+      display: flex;
+      gap: 40px;
+    }
+
+    .header__link {
+      font-size: 1rem;
+    }
+
+    .header__phone {
+      font-size: 1rem;
+    }
+
+    .header__hamburger {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .header__logo {
+      padding: 16px 32px;
+    }
+
+    .header__logo img {
+      height: 80px;
+    }
+
+    .header--scrolled .header__logo img {
+      height: 44px;
+    }
+  }
+</style>

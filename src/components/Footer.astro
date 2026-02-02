@@ -2,6 +2,78 @@
 
 ---
 
-<footer class="footer" id="footer"></footer>
+<footer class="footer" id="footer">
+  <div class="footer__container container">
+    <div class="footer__top">
+      <h3 class="footer__title">Deep Austin Roots</h3>
+      <div class="footer__contact">
+        <p>903-426-7350</p>
+        <p>capitolsw@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">Copyright &copy; 2025 Capitol Shield. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
 
-<style></style>
+<style>
+  .footer {
+    background-color: var(--color-blue);
+    padding: 48px 0 24px;
+  }
+
+  .footer__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .footer__title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-gold);
+  }
+
+  .footer__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer__contact p {
+    font-size: 0.9rem;
+    color: var(--color-white);
+  }
+
+  .footer__bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 24px;
+    text-align: center;
+  }
+
+  .footer__copy {
+    font-size: 0.8rem;
+    color: var(--color-white);
+    opacity: 0.7;
+  }
+
+  @media (min-width: 768px) {
+    .footer {
+      padding: 64px 0 32px;
+    }
+
+    .footer__top {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .footer__contact {
+      flex-direction: row;
+      gap: 32px;
+    }
+  }
+</style>
