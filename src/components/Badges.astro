@@ -3,33 +3,192 @@
 ---
 
 <section class="badges" id="results">
+  <!-- Decorative border lines (outside container for proper positioning) -->
+  <div class="badges__borders">
+    <div class="badges__border-left"></div>
+    <div class="badges__border-right"></div>
+    <div class="badges__border-h-left"></div>
+    <div class="badges__border-h-right"></div>
+  </div>
+
   <div class="badges__container container">
     <h2 class="badges__title">Results for Austin Families</h2>
     <div class="badges__grid">
       <div class="badges__item">
-        <span class="badges__number">500+</span>
+        <span class="badges__number" data-target="500" data-suffix="+">0</span>
+        <span class="badges__line"></span>
         <span class="badges__label">Families Helped</span>
       </div>
       <div class="badges__item">
-        <span class="badges__number">$100M+</span>
+        <span
+          class="badges__number"
+          data-target="100"
+          data-prefix="$"
+          data-suffix="M+">0</span
+        >
+        <span class="badges__line"></span>
         <span class="badges__label">Recovered</span>
       </div>
       <div class="badges__item">
-        <span class="badges__number">99%</span>
+        <span class="badges__number" data-target="99" data-suffix="%">0</span>
+        <span class="badges__line"></span>
         <span class="badges__label">Success Rate</span>
       </div>
       <div class="badges__item">
-        <span class="badges__number">Top Rated</span>
+        <span class="badges__number" data-text="Top Rated"></span>
+        <span class="badges__line"></span>
         <span class="badges__label">In Austin</span>
       </div>
     </div>
   </div>
 </section>
 
+<script>
+  const section = document.getElementById('results');
+  const numbers = document.querySelectorAll('.badges__number');
+  let animated = false;
+
+  function animateCounter(el: Element) {
+    const target = parseInt(el.getAttribute('data-target') || '0');
+    const prefix = el.getAttribute('data-prefix') || '';
+    const suffix = el.getAttribute('data-suffix') || '';
+    const text = el.getAttribute('data-text');
+
+    if (text) {
+      el.textContent = text;
+      return;
+    }
+
+    const duration = 2000;
+    const steps = 60;
+    const increment = target / steps;
+    let current = 0;
+    let step = 0;
+
+    const timer = setInterval(() => {
+      step++;
+      current = Math.min(Math.round(increment * step), target);
+      el.textContent = prefix + current + suffix;
+
+      if (step >= steps) {
+        clearInterval(timer);
+        el.textContent = prefix + target + suffix;
+      }
+    }, duration / steps);
+  }
+
+  function onIntersect(entries: IntersectionObserverEntry[]) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+        section?.classList.add('badges--visible');
+        numbers.forEach((num) => animateCounter(num));
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver(onIntersect, {
+    threshold: 0.2,
+    rootMargin: '-50px 0px',
+  });
+
+  if (section) observer.observe(section);
+</script>
+
 <style>
   .badges {
+    position: relative;
     background-color: var(--color-blue);
     padding: 48px 0;
+    overflow: hidden;
+  }
+
+  /* Borders wrapper - matches container sizing */
+  .badges__borders {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: var(--max-width);
+    height: 100%;
+    padding: 0 20px;
+    pointer-events: none;
+  }
+
+  /* Decorative border lines */
+  .badges__border-left,
+  .badges__border-right,
+  .badges__border-h-left,
+  .badges__border-h-right {
+    position: absolute;
+    background-color: #6b7280;
+    z-index: 1;
+  }
+
+  /* Vertical lines - from top of section down to title center */
+  .badges__border-left,
+  .badges__border-right {
+    top: 0;
+    width: 2px;
+    height: 65px;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  .badges__border-left {
+    left: 20px;
+  }
+
+  .badges__border-right {
+    right: 20px;
+  }
+
+  /* Horizontal lines - centered on title, extending outward */
+  .badges__border-h-left,
+  .badges__border-h-right {
+    top: 65px;
+    height: 2px;
+    width: calc(50% - 180px);
+    transform: scaleX(0);
+  }
+
+  .badges__border-h-left {
+    left: 20px;
+    transform-origin: left;
+  }
+
+  .badges__border-h-right {
+    right: 20px;
+    transform-origin: right;
+  }
+
+  /* Animations */
+  .badges--visible .badges__border-left,
+  .badges--visible .badges__border-right {
+    animation: borderGrowDown 0.5s ease-out forwards;
+  }
+
+  .badges--visible .badges__border-h-left,
+  .badges--visible .badges__border-h-right {
+    animation: borderGrowOut 0.6s ease-out 0.4s forwards;
+  }
+
+  @keyframes borderGrowDown {
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes borderGrowOut {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  .badges__container {
+    position: relative;
+    z-index: 2;
   }
 
   .badges__title {
@@ -37,7 +196,7 @@
     font-size: 1.25rem;
     color: var(--color-white);
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 40px;
   }
 
   .badges__grid {
@@ -48,9 +207,12 @@
 
   .badges__item {
     text-align: center;
-    padding: 20px;
+    padding: 24px 16px;
     border: 2px solid var(--color-gold);
-    border-radius: 8px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .badges__number {
@@ -58,8 +220,21 @@
     font-family: var(--font-serif);
     font-size: 1.5rem;
     font-weight: 700;
+    font-style: italic;
     color: var(--color-white);
-    margin-bottom: 4px;
+  }
+
+  .badges__line {
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #6b7280;
+    margin: 8px 0;
+    transition: width 0.6s ease-out;
+  }
+
+  .badges--visible .badges__line {
+    width: 60px;
   }
 
   .badges__label {
@@ -67,22 +242,102 @@
     color: var(--color-gold);
   }
 
+  /* Tablet */
   @media (min-width: 768px) {
     .badges {
-      padding: 64px 0;
+      padding: 56px 0;
+    }
+
+    .badges__borders {
+      padding: 0 32px;
+    }
+
+    .badges__border-left {
+      left: 32px;
+    }
+
+    .badges__border-right {
+      right: 32px;
+    }
+
+    .badges__border-left,
+    .badges__border-right {
+      height: 75px;
+    }
+
+    .badges__border-h-left,
+    .badges__border-h-right {
+      top: 75px;
+      width: calc(50% - 220px);
+    }
+
+    .badges__border-h-left {
+      left: 32px;
+    }
+
+    .badges__border-h-right {
+      right: 32px;
     }
 
     .badges__title {
       font-size: 1.5rem;
+      margin-bottom: 48px;
     }
 
     .badges__grid {
       grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
+      gap: 24px;
     }
 
     .badges__number {
       font-size: 1.75rem;
+    }
+
+    .badges__item {
+      padding: 28px 16px;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .badges {
+      padding: 64px 0;
+    }
+
+    .badges__borders {
+      padding: 0 40px;
+    }
+
+    .badges__border-left,
+    .badges__border-right {
+      height: 85px;
+    }
+
+    .badges__border-h-left,
+    .badges__border-h-right {
+      top: 85px;
+      width: calc(50% - 240px);
+    }
+
+    .badges__title {
+      font-size: 1.65rem;
+      margin-bottom: 56px;
+    }
+
+    .badges__grid {
+      gap: 32px;
+    }
+
+    .badges__number {
+      font-size: 2rem;
+    }
+
+    .badges__item {
+      padding: 32px 20px;
+    }
+
+    .badges--visible .badges__line {
+      width: 80px;
     }
   }
 </style>
