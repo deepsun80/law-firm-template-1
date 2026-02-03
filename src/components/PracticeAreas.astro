@@ -327,14 +327,14 @@ const pillars = [
 
   .card-overlay-content .card-icon {
     font-size: 24px;
-    color: #fff;
+    color: var(--color-blue);
   }
 
   .card-overlay-title {
     font-family: var(--font-title);
     font-size: 18px;
     font-weight: 700;
-    color: #fff;
+    color: var(--color-blue);
     margin: 0;
   }
 
@@ -391,10 +391,10 @@ const pillars = [
     display: inline-block;
     padding: 12px 30px;
     background: var(--color-gold);
-    color: #fff;
+    color: var(--color-blue);
     font-family: var(--font-body);
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-decoration: none;
@@ -419,8 +419,10 @@ const pillars = [
   }
 
   .card-content .icon-stethoscope::before,
-  .card-overlay-content .icon-stethoscope::before {
-    filter: brightness(0) invert(1);
+  .card-overlay-content .icon-stethoscope::before,
+  .card-overlay-content .icon-hardhat::before,
+  .card-overlay-content .icon-car::before {
+    filter: brightness(0) saturate(100%) invert(10%) sepia(30%) saturate(2000%) hue-rotate(175deg) brightness(95%) contrast(105%);
   }
 
   .card-content .icon-stethoscope::before {
