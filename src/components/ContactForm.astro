@@ -1,0 +1,201 @@
+---
+
+---
+
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <h3 class="contact-title">Start Your Free Case Review</h3>
+      <p class="contact-subtitle">Get the answers you deserve. No obligation, no pressure—just honest guidance from Austin's trusted injury attorneys.</p>
+
+      <form class="contact-form" id="contact-form" name="contactForm">
+        <div class="form-row">
+          <div class="field-set">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required />
+          </div>
+          <div class="field-set">
+            <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field-set">
+            <input type="tel" name="phone" id="phone" class="form-control" placeholder="Your Phone" required />
+          </div>
+          <div class="field-set">
+            <select name="case-type" id="case-type" class="form-control" required>
+              <option value="" disabled selected>Select Case Type</option>
+              <option value="medical-negligence">Medical Negligence</option>
+              <option value="work-injury">Work Injury</option>
+              <option value="auto-accident">Auto Accident</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-set">
+          <textarea name="message" id="message" class="form-control" placeholder="Tell us about your case..." rows="4"></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn-submit">Get My Free Consultation</button>
+        </div>
+        <p class="form-disclaimer">Your information is 100% confidential. We respond within 24 hours.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Handle form submission here
+    alert('Thank you for your inquiry. We will contact you within 24 hours.');
+    form.reset();
+  });
+</script>
+
+<style>
+  .contact-section {
+    background: var(--color-blue);
+    padding: 80px 0;
+  }
+
+  @media (min-width: 768px) {
+    .contact-section {
+      padding: 100px 0;
+    }
+  }
+
+  .contact-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .contact-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-title {
+    font-family: var(--font-title);
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 15px 0;
+  }
+
+  @media (min-width: 768px) {
+    .contact-title {
+      font-size: 36px;
+    }
+  }
+
+  .contact-subtitle {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 40px 0;
+  }
+
+  .contact-form {
+    text-align: left;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .field-set {
+    margin-bottom: 0;
+  }
+
+  .field-set:not(.form-row .field-set) {
+    margin-bottom: 20px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 15px;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .form-control:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px;
+  }
+
+  select.form-control option {
+    background: var(--color-blue);
+    color: #fff;
+  }
+
+  textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-submit {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .btn-submit {
+    display: inline-block;
+    padding: 16px 40px;
+    background: var(--color-gold);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 2px solid var(--color-gold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-submit:hover {
+    background: transparent;
+    color: #fff;
+    border-color: #fff;
+  }
+
+  .form-disclaimer {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    margin: 20px 0 0 0;
+  }
+</style>

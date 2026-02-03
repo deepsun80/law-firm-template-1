@@ -1,80 +1,89 @@
 ---
 const testimonials = [
   {
-    title: "Trustworthy lawyer",
-    text: "From the initial consultation to the final resolution, their professionalism and dedication were evident. They kept me informed every step of the way and fought tirelessly to protect my rights.",
-    author: "John D., Family Law Client"
+    title: 'Life-Changing Results',
+    text: "After my car accident, I didn't know where to turn. They handled everything—from dealing with insurance to getting me the settlement I deserved. I can't thank them enough.",
+    author: 'Maria S., Auto Accident Client',
   },
   {
-    title: "Quality lawyer service",
-    text: "Their attention to detail and strategic approach were instrumental in achieving a favorable outcome. I am forever grateful for their hard work and commitment.",
-    author: "Maria S., Criminal Defense Client"
+    title: 'Fought for My Family',
+    text: 'When my husband was injured at work, we were terrified about our future. The team fought tirelessly and secured compensation that helped us get back on our feet.',
+    author: 'Jennifer T., Work Injury Client',
   },
   {
-    title: "Top lawyer listed",
-    text: "They fought for my right to fair compensation and kept me informed throughout the process. Their expertise in personal injury law made a significant difference in my recovery.",
-    author: "Alex R., Personal Injury Client"
+    title: 'Truly Caring Attorneys',
+    text: 'They treated me like family, not just another case number. Their attention to detail and genuine concern made all the difference during the most difficult time of my life.',
+    author: 'Robert M., Medical Negligence Client',
   },
   {
-    title: "Great services",
-    text: "They provided clear guidance on complicated issues. Their practical advice and thorough understanding of business law have been invaluable to my company's success.",
-    author: "Samantha T., Business Law Client"
+    title: 'Exceeded All Expectations',
+    text: 'I was hesitant to hire a lawyer, but they made the process so easy. They kept me informed every step of the way and the results spoke for themselves.',
+    author: 'David L., Auto Accident Client',
   },
   {
-    title: "Highly recommend",
-    text: "The attorneys took the time to understand my concerns and crafted a comprehensive plan that gave me peace of mind. Their knowledge and professionalism were excellent.",
-    author: "Edward L., Estate Planning Client"
+    title: "Austin's Best",
+    text: 'Being local matters. They know Austin, they know our community, and they know how to win. I recommend them to everyone I know.',
+    author: 'Sarah K., Personal Injury Client',
   },
   {
-    title: "Excellent support",
-    text: "They handled the negotiations and litigation with skill and ensured my interests were protected. I was impressed with their responsiveness and dedication to my case.",
-    author: "Linda W., Real Estate Law Client"
+    title: 'No Win, No Fee Promise',
+    text: 'I was worried about legal fees, but their no-win-no-fee policy meant I could focus on recovery. They delivered beyond my expectations.',
+    author: 'Michael R., Work Injury Client',
   },
-  {
-    title: "Reliable lawyer",
-    text: "The attorneys were incredibly knowledgeable and provided practical solutions that resolved the conflict efficiently. Their expertise in employment law is unparalleled.",
-    author: "Michael B., Employment Law Client"
-  },
-  {
-    title: "Five-star services",
-    text: "Their thorough investigation and compelling defense in court resulted in a not-guilty verdict. I am eternally grateful for their expert legal representation.",
-    author: "David P., Criminal Defense Client"
-  }
 ];
 ---
 
 <section class="testimonials-section" id="testimonials">
-  <div class="testimonials-bg" style="background-image: url('/images/background/3.jpg');"></div>
+  <div
+    class="testimonials-bg"
+    style="background-image: url('/images/background/testimonials-bg.webp');"
+  >
+  </div>
   <div class="testimonials-overlay"></div>
 
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Testimonials</h2>
+      <h2 class="section-title">What Our Clients Say</h2>
       <div class="small-border"></div>
     </div>
 
     <div class="testimonials-carousel" id="testimonials-carousel">
       <div class="carousel-track">
-        {testimonials.map((testimonial, index) => (
-          <div class={`testimonial-item ${index === 0 ? 'active' : ''}`} data-index={index}>
-            <div class="testimonial-content">
-              <i class="quote-icon">&#10077;</i>
-              <h3 class="testimonial-title">{testimonial.title}</h3>
-              <p class="testimonial-text">{testimonial.text}</p>
-              <div class="testimonial-author">{testimonial.author}</div>
+        {
+          testimonials.map((testimonial, index) => (
+            <div
+              class={`testimonial-item ${index === 0 ? 'active' : ''}`}
+              data-index={index}
+            >
+              <div class="testimonial-content">
+                <i class="quote-icon">&#10077;</i>
+                <h3 class="testimonial-title">{testimonial.title}</h3>
+                <p class="testimonial-text">{testimonial.text}</p>
+                <div class="testimonial-author">{testimonial.author}</div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
       <div class="carousel-nav">
-        <button class="nav-btn prev-btn" aria-label="Previous testimonial">&#8249;</button>
+        <button class="nav-btn prev-btn" aria-label="Previous testimonial"
+          >&#8249;</button
+        >
         <div class="carousel-dots">
-          {testimonials.map((_, index) => (
-            <button class={`dot ${index === 0 ? 'active' : ''}`} data-index={index} aria-label={`Testimonial ${index + 1}`}></button>
-          ))}
+          {
+            testimonials.map((_, index) => (
+              <button
+                class={`dot ${index === 0 ? 'active' : ''}`}
+                data-index={index}
+                aria-label={`Testimonial ${index + 1}`}
+              />
+            ))
+          }
         </div>
-        <button class="nav-btn next-btn" aria-label="Next testimonial">&#8250;</button>
+        <button class="nav-btn next-btn" aria-label="Next testimonial"
+          >&#8250;</button
+        >
       </div>
     </div>
   </div>
@@ -93,7 +102,6 @@ const testimonials = [
   function showTestimonial(index: number) {
     if (!items || !dots) return;
 
-    // Handle wraparound
     if (index >= items.length) index = 0;
     if (index < 0) index = items.length - 1;
 
@@ -153,6 +161,8 @@ const testimonials = [
     padding: 80px 0;
     color: #fff;
     overflow: hidden;
+    border-top: 1px solid var(--color-white);
+    border-bottom: 1px solid var(--color-white);
   }
 
   @media (min-width: 768px) {
@@ -184,7 +194,7 @@ const testimonials = [
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.75);
   }
 
   .testimonials-section .container {
@@ -201,7 +211,7 @@ const testimonials = [
   }
 
   .section-title {
-    font-family: "Libre Baskerville", serif;
+    font-family: var(--font-title);
     font-size: 32px;
     font-weight: 700;
     color: #fff;
@@ -217,7 +227,7 @@ const testimonials = [
   .small-border {
     width: 50px;
     height: 2px;
-    background: var(--primary-color);
+    background: var(--color-gold);
     margin: 0 auto;
   }
 
@@ -229,7 +239,7 @@ const testimonials = [
 
   .carousel-track {
     position: relative;
-    min-height: 300px;
+    min-height: 320px;
   }
 
   .testimonial-item {
@@ -239,7 +249,9 @@ const testimonials = [
     width: 100%;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition:
+      opacity 0.5s ease,
+      visibility 0.5s ease;
   }
 
   .testimonial-item.active {
@@ -248,26 +260,21 @@ const testimonials = [
   }
 
   .testimonial-content {
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--color-blue);
     padding: 40px;
     text-align: center;
-    transition: background 0.3s ease;
-  }
-
-  .testimonial-content:hover {
-    background: rgba(0, 0, 0, 0.8);
   }
 
   .quote-icon {
     font-size: 36px;
-    color: var(--primary-color);
+    color: var(--color-gold);
     display: block;
     margin-bottom: 20px;
     font-style: normal;
   }
 
   .testimonial-title {
-    font-family: "Libre Baskerville", serif;
+    font-family: var(--font-title);
     font-size: 18px;
     font-weight: 700;
     color: #fff;
@@ -275,7 +282,7 @@ const testimonials = [
   }
 
   .testimonial-text {
-    font-family: "Jost", sans-serif;
+    font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.9);
@@ -283,9 +290,9 @@ const testimonials = [
   }
 
   .testimonial-author {
-    font-family: "Jost", sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--color-gold);
   }
 
   /* Carousel Navigation */
@@ -312,7 +319,7 @@ const testimonials = [
   }
 
   .nav-btn:hover {
-    background: var(--primary-color);
+    background: var(--color-gold);
   }
 
   .carousel-dots {
@@ -332,6 +339,6 @@ const testimonials = [
 
   .dot.active,
   .dot:hover {
-    background: var(--primary-color);
+    background: var(--color-gold);
   }
 </style>

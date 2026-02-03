@@ -3,18 +3,18 @@
 ---
 
 <!-- Topbar -->
-<div id="topbar" class="topbar-noborder">
+<div id="topbar">
   <div class="container">
     <div class="topbar-left">
       <span class="topbar-widget tb-social">
-        <a href="#"><i class="fa fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
       </span>
     </div>
     <div class="topbar-right">
-      <span class="topbar-widget"><a href="#">Privacy policy</a></span>
-      <span class="topbar-widget"><a href="#">Request Quote</a></span>
+      <span class="topbar-widget"><a href="#">Privacy Policy</a></span>
+      <span class="topbar-widget"><a href="#">Free Consultation</a></span>
       <span class="topbar-widget"><a href="#">FAQ</a></span>
     </div>
   </div>
@@ -25,27 +25,31 @@
   <div class="container">
     <div class="header-inner">
       <div class="logo-wrapper">
-        <a href="/">
-          <img src="/images/logo-light.png" alt="Logo" class="logo" />
-          <img src="/images/logo.png" alt="Logo" class="logo-dark" />
+        <a href="#">
+          <img src="/images/logo-light.webp" alt="Capitol Shield Law Group" class="logo" />
         </a>
       </div>
 
       <nav class="main-nav" id="main-nav">
         <ul class="nav-menu">
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/practice-areas">Practice Areas</a></li>
-          <li><a href="/news">News</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Practice Areas</a></li>
+          <li><a href="#">Results</a></li>
+          <li><a href="#">Contact</a></li>
         </ul>
       </nav>
 
       <div class="header-right">
-        <div class="h-phone">
-          <span>Need&nbsp;Help?</span>
-          <i class="fa fa-phone"></i> 1 200 300 9000
-        </div>
+        <a href="tel:+15123339296" class="h-phone">
+          <div class="phone-icon">
+            <i class="fa fa-phone"></i>
+          </div>
+          <div class="phone-text">
+            <span class="phone-label">Need Help?</span>
+            <span class="phone-number">(512) 333-9296</span>
+          </div>
+        </a>
         <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
           <span></span>
           <span></span>
@@ -57,7 +61,6 @@
 </header>
 
 <script>
-  // Sticky header on scroll
   const header = document.getElementById('header');
   const topbar = document.getElementById('topbar');
 
@@ -73,7 +76,6 @@
 
   window.addEventListener('scroll', handleScroll);
 
-  // Mobile menu toggle
   const menuToggle = document.getElementById('menu-toggle');
   const mainNav = document.getElementById('main-nav');
 
@@ -84,13 +86,13 @@
 </script>
 
 <style>
-  /* Topbar Styles */
+  /* Topbar */
   #topbar {
     position: relative;
     z-index: 1002;
     width: 100%;
     padding: 0;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--color-blue);
     display: none;
   }
 
@@ -135,7 +137,7 @@
   }
 
   .topbar-widget a:hover {
-    color: var(--primary-color);
+    color: var(--color-gold);
   }
 
   .topbar-widget.tb-social {
@@ -149,7 +151,7 @@
     align-items: center;
   }
 
-  /* Header Styles */
+  /* Header */
   .header {
     position: fixed;
     top: 0;
@@ -172,16 +174,8 @@
   .header.scrolled {
     position: fixed;
     top: 0;
-    background: rgba(17, 17, 17, 1);
+    background: var(--color-blue);
     box-shadow: 0 4px 6px 0 rgba(10, 10, 10, 0.1);
-  }
-
-  .header.scrolled .logo {
-    display: none;
-  }
-
-  .header.scrolled .logo-dark {
-    display: block;
   }
 
   .header .container {
@@ -204,12 +198,8 @@
   }
 
   .logo-wrapper img {
-    height: 40px;
+    height: 55px;
     width: auto;
-  }
-
-  .logo-dark {
-    display: none;
   }
 
   /* Navigation */
@@ -231,16 +221,12 @@
     gap: 0;
   }
 
-  .nav-menu li {
-    position: relative;
-  }
-
   .nav-menu li a {
     display: block;
     padding: 30px 18px;
     color: #fff;
     text-decoration: none;
-    font-family: "Jost", sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 1px;
@@ -248,11 +234,7 @@
   }
 
   .nav-menu li a:hover {
-    color: var(--primary-color);
-  }
-
-  .header.scrolled .nav-menu li a {
-    color: #fff;
+    color: var(--color-gold);
   }
 
   /* Header Right */
@@ -262,27 +244,58 @@
     gap: 20px;
   }
 
+  /* Phone - Redesigned */
   .h-phone {
     display: none;
+    align-items: center;
+    gap: 12px;
     color: #fff;
-    font-family: "Jost", sans-serif;
-    font-size: 14px;
+    text-decoration: none;
   }
 
   @media (min-width: 992px) {
     .h-phone {
-      display: block;
+      display: flex;
     }
   }
 
-  .h-phone span {
-    margin-right: 10px;
-    opacity: 0.8;
+  .phone-icon {
+    width: 45px;
+    height: 45px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .h-phone i {
-    margin-right: 5px;
-    color: var(--primary-color);
+  .phone-icon i {
+    font-size: 20px;
+    color: #fff;
+  }
+
+  .phone-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .phone-number {
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .h-phone:hover .phone-number {
+    color: var(--color-gold);
   }
 
   /* Mobile Menu Toggle */
@@ -331,7 +344,7 @@
       top: 80px;
       left: 0;
       width: 100%;
-      background: #111;
+      background: var(--color-blue);
       padding: 20px 0;
       transform: translateY(-100%);
       opacity: 0;

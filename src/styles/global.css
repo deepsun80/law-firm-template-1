@@ -1,29 +1,26 @@
 /* ===== CSS Custom Properties ===== */
 :root {
-  /* JUSTICA Template Colors */
+  /* Brand Colors */
+  --color-blue: #00243e;
+  --color-blue-rgb: 0, 36, 62;
+  --color-gold: #eaa636;
+  --color-gold-rgb: 234, 166, 54;
+  --color-gold-hover: #d4942e;
+  --color-white: #ffffff;
+  --color-white-rgb: 255, 255, 255;
+  --color-dark: #111111;
+  --color-dark-rgb: 17, 17, 17;
+  --color-text: #606060;
+  --color-text-light: rgba(255, 255, 255, 0.85);
+
+  /* Legacy variables */
   --primary-color: #eaa636;
   --primary-color-rgb: 234, 166, 54;
   --bg-dark: #111111;
-  --bg-dark-rgb: 17, 17, 17;
-  --white: #ffffff;
-  --white-rgb: 255, 255, 255;
-  --text-color: #606060;
-  --title-color: #111111;
-
-  /* Legacy variables (keeping for compatibility) */
-  --color-slate: #1d2b38;
-  --color-blue: #00243e;
-  --color-gold: #eaa636;
-  --color-gold-hover: #d4942e;
-  --color-white: #ffffff;
-  --color-light-gray: #f5f7f9;
 
   /* Fonts */
   --font-title: 'Libre Baskerville', serif;
   --font-body: 'Jost', sans-serif;
-  --font-cursive: 'Allura', cursive;
-  --font-sans: 'Roboto', sans-serif;
-  --font-serif: 'Libre Baskerville', serif;
 
   /* Layout */
   --header-height: 80px;
@@ -50,7 +47,7 @@ body {
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 400;
-  color: var(--text-color);
+  color: var(--color-text);
   line-height: 1.8;
   overflow-x: hidden;
 }
@@ -85,7 +82,7 @@ ol {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-title);
-  color: var(--title-color);
+  color: var(--color-dark);
   line-height: 1.3;
 }
 
@@ -110,7 +107,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* ===== Font Awesome Icons (minimal subset) ===== */
+/* ===== Font Awesome Icons ===== */
 @font-face {
   font-family: 'FontAwesome';
   src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2') format('woff2');
@@ -140,3 +137,9 @@ h1, h2, h3, h4, h5, h6 {
 .fa-file-pdf-o:before { content: "\f1c1"; }
 .fa-long-arrow-right:before { content: "\f178"; }
 .fa-quote-left:before { content: "\f10d"; }
+.fa-check:before { content: "\f00c"; }
+.fa-stethoscope:before { content: "\f0f1"; }
+.fa-hard-hat:before { content: "\f807"; }
+.fa-car:before { content: "\f1b9"; }
+.fa-user-md:before { content: "\f0f0"; }
+.fa-briefcase:before { content: "\f0b1"; }

@@ -5,28 +5,28 @@
 <!-- Hero Carousel -->
 <section class="hero-carousel" id="hero-carousel">
   <div class="carousel-inner">
-    <!-- Slide 1 -->
-    <div class="carousel-slide active" data-bg="/images/slider/1.jpg">
+    <!-- Slide 1 - Team -->
+    <div class="carousel-slide slide-team active">
       <div class="slide-overlay"></div>
       <div class="container">
         <div class="slide-content">
-          <h4 class="slide-subtitle">Need Any Help?</h4>
-          <h1 class="slide-title">We Fight for Right</h1>
-          <p class="slide-text">Providing legal representation and counsel to safeguard your rights. Navigate complex legal challenges, and pursue justice with unwavering dedication.</p>
-          <a href="/practice-areas" class="btn-custom">Explore</a>
+          <h4 class="slide-subtitle">Restoring Your Future</h4>
+          <h1 class="slide-title">Defending Austin's Injured</h1>
+          <p class="slide-text">The strategic advocacy 500+ local families trust when it matters most.</p>
+          <a href="#contact" class="btn-custom">Free Consultation</a>
         </div>
       </div>
     </div>
 
-    <!-- Slide 2 -->
-    <div class="carousel-slide" data-bg="/images/slider/2.jpg">
+    <!-- Slide 2 - Capitol -->
+    <div class="carousel-slide slide-capitol">
       <div class="slide-overlay"></div>
       <div class="container">
         <div class="slide-content">
-          <h4 class="slide-subtitle">Law & Insurance Specialist</h4>
-          <h1 class="slide-title">Because We Care</h1>
-          <p class="slide-text">Providing legal representation and counsel to safeguard your rights. Navigate complex legal challenges, and pursue justice with unwavering dedication.</p>
-          <a href="/practice-areas" class="btn-custom">Explore</a>
+          <h4 class="slide-subtitle">Restoring Your Future</h4>
+          <h1 class="slide-title">Austin's Trusted Injury Advocates</h1>
+          <p class="slide-text">The strategic advocacy 500+ local families trust when it matters most.</p>
+          <a href="#contact" class="btn-custom">Free Consultation</a>
         </div>
       </div>
     </div>
@@ -52,13 +52,12 @@
   <div class="container">
     <div class="cta-inner">
       <h3 class="cta-text">Contact Us Now! Get a Free Consultation for Your Case.</h3>
-      <a href="/contact" class="btn-custom btn-dark">Make Appointment</a>
+      <a href="#contact" class="btn-cta">Make Appointment</a>
     </div>
   </div>
 </section>
 
 <script>
-  // Carousel functionality
   const slides = document.querySelectorAll('.carousel-slide');
   const indicators = document.querySelectorAll('.indicator');
   const prevBtn = document.querySelector('.carousel-control.prev');
@@ -67,16 +66,13 @@
   let autoplayInterval: ReturnType<typeof setInterval>;
 
   function showSlide(index: number) {
-    // Handle wraparound
     if (index >= slides.length) index = 0;
     if (index < 0) index = slides.length - 1;
 
-    // Update slides
     slides.forEach((slide, i) => {
       slide.classList.toggle('active', i === index);
     });
 
-    // Update indicators
     indicators.forEach((indicator, i) => {
       indicator.classList.toggle('active', i === index);
     });
@@ -100,7 +96,6 @@
     clearInterval(autoplayInterval);
   }
 
-  // Event listeners
   prevBtn?.addEventListener('click', () => {
     prevSlide();
     stopAutoplay();
@@ -121,16 +116,7 @@
     });
   });
 
-  // Start autoplay
   startAutoplay();
-
-  // Set background images
-  slides.forEach((slide) => {
-    const bg = slide.getAttribute('data-bg');
-    if (bg) {
-      (slide as HTMLElement).style.backgroundImage = `url(${bg})`;
-    }
-  });
 </script>
 
 <style>
@@ -167,13 +153,47 @@
     visibility: visible;
   }
 
+  /* Slide 1 - Team - Responsive backgrounds */
+  .slide-team {
+    background-image: url('/images/slider/hero-team-mobile.webp');
+  }
+
+  @media (min-width: 641px) {
+    .slide-team {
+      background-image: url('/images/slider/hero-team-tablet.webp');
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .slide-team {
+      background-image: url('/images/slider/hero-team-desktop.webp');
+    }
+  }
+
+  /* Slide 2 - Capitol - Responsive backgrounds */
+  .slide-capitol {
+    background-image: url('/images/slider/hero-capitol-mobile.webp');
+  }
+
+  @media (min-width: 641px) {
+    .slide-capitol {
+      background-image: url('/images/slider/hero-capitol-tablet.webp');
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .slide-capitol {
+      background-image: url('/images/slider/hero-capitol-desktop.webp');
+    }
+  }
+
   .slide-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.35);
   }
 
   .carousel-slide .container {
@@ -188,25 +208,26 @@
   }
 
   .slide-content {
-    max-width: 500px;
+    max-width: 550px;
     color: #fff;
   }
 
   .slide-subtitle {
-    font-family: "Jost", sans-serif;
+    font-family: var(--font-body);
     font-size: 16px;
     font-weight: 400;
-    color: var(--primary-color);
+    color: var(--color-gold);
     margin-bottom: 15px;
     animation: fadeInUp 0.6s ease;
   }
 
   .slide-title {
-    font-family: "Libre Baskerville", serif;
+    font-family: var(--font-title);
     font-size: 36px;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 20px;
+    color: var(--color-white);
     animation: fadeInUp 0.6s ease 0.1s both;
   }
 
@@ -223,11 +244,11 @@
   }
 
   .slide-text {
-    font-family: "Jost", sans-serif;
+    font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.8;
     margin-bottom: 30px;
-    opacity: 0.9;
+    opacity: 0.95;
     animation: fadeInUp 0.6s ease 0.2s both;
   }
 
@@ -239,16 +260,16 @@
 
   .btn-custom {
     display: inline-block;
-    padding: 12px 30px;
-    background: var(--primary-color);
+    padding: 14px 35px;
+    background: var(--color-gold);
     color: #fff;
-    font-family: "Jost", sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-decoration: none;
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--color-gold);
     transition: all 0.3s ease;
     animation: fadeInUp 0.6s ease 0.4s both;
   }
@@ -256,6 +277,7 @@
   .btn-custom:hover {
     background: transparent;
     color: #fff;
+    border-color: #fff;
   }
 
   /* Carousel Indicators */
@@ -281,7 +303,7 @@
 
   .indicator.active,
   .indicator:hover {
-    background: var(--primary-color);
+    background: var(--color-gold);
   }
 
   /* Carousel Controls */
@@ -302,7 +324,7 @@
   }
 
   .carousel-control:hover {
-    background: var(--primary-color);
+    background: var(--color-gold);
   }
 
   .carousel-control.prev {
@@ -321,7 +343,7 @@
 
   /* CTA Section */
   .cta-section {
-    background: var(--primary-color);
+    background: var(--color-gold);
     padding: 30px 0;
   }
 
@@ -348,7 +370,7 @@
   }
 
   .cta-text {
-    font-family: "Libre Baskerville", serif;
+    font-family: var(--font-title);
     font-size: 18px;
     font-weight: 400;
     color: #fff;
@@ -361,16 +383,26 @@
     }
   }
 
-  .btn-custom.btn-dark {
-    background: #111;
-    border-color: #111;
-    animation: none;
+  .btn-cta {
+    display: inline-block;
+    padding: 14px 35px;
+    background: var(--color-blue);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border: 2px solid var(--color-blue);
     white-space: nowrap;
+    transition: all 0.3s ease;
   }
 
-  .btn-custom.btn-dark:hover {
-    background: #000;
-    border-color: #000;
+  .btn-cta:hover {
+    background: transparent;
+    color: var(--color-blue);
+    border-color: var(--color-blue);
   }
 
   /* Animations */

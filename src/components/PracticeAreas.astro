@@ -1,26 +1,32 @@
 ---
 const services = [
   {
-    icon: "people",
-    title: "Business Law",
-    description: "Explore innovative strategies, expert guidance, and tailored solutions to propel your success forward.",
-    image: "/images/services/1.jpg",
+    icon: "stethoscope",
+    title: "Medical Negligence",
+    description: "When healthcare providers fail their duty of care, we fight to hold them accountable and secure the compensation you deserve.",
+    image: "/images/services/medical-negligence.webp",
     link: "#"
   },
   {
-    icon: "home",
-    title: "Family Law",
-    description: "Explore innovative strategies, expert guidance, and tailored solutions to propel your success forward.",
-    image: "/images/services/2.jpg",
+    icon: "hardhat",
+    title: "Work Injuries",
+    description: "Injured on the job? We navigate workers' compensation claims and pursue maximum benefits for Austin's hardworking families.",
+    image: "/images/services/work-injuries.webp",
     link: "#"
   },
   {
-    icon: "law",
-    title: "Criminal Law",
-    description: "Explore innovative strategies, expert guidance, and tailored solutions to propel your success forward.",
-    image: "/images/services/3.jpg",
+    icon: "car",
+    title: "Auto Accidents",
+    description: "From fender benders to catastrophic collisions, we protect your rights and fight for fair settlements against insurance companies.",
+    image: "/images/services/auto-accidents.webp",
     link: "#"
   }
+];
+
+const pillars = [
+  "100% Focused on You.",
+  "No Win, No Fee.",
+  "Local Austin Roots."
 ];
 ---
 
@@ -29,14 +35,23 @@ const services = [
   <div class="container">
     <div class="welcome-inner">
       <div class="welcome-heading">
-        <span class="welcome-subtitle">Welcome</span>
+        <span class="welcome-subtitle">Our Promise</span>
         <h2 class="welcome-title">
-          Reputation.<br />Respect. Result.
+          The Three Pillars<br />of Your Defense
         </h2>
         <div class="small-border"></div>
       </div>
       <div class="welcome-content">
-        <p>We understand that legal issues can be some of the most challenging and stressful experiences in life. Whether you are dealing with a complex family matter, facing criminal charges, or navigating the intricacies of business law, our mission is to provide you with comprehensive, compassionate, and expert legal guidance. Our seasoned attorneys are committed to the highest standard of legal representation tailored to meet your unique needs.</p>
+        <ul class="pillars-list">
+          {pillars.map((pillar) => (
+            <li class="pillar-item">
+              <span class="pillar-icon">
+                <i class="fa fa-check"></i>
+              </span>
+              <span class="pillar-text">{pillar}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </div>
@@ -49,16 +64,20 @@ const services = [
       {services.map((service, index) => (
         <div class="service-card" style={`--delay: ${0.2 + index * 0.2}s`}>
           <div class="card-image">
-            <img src={service.image} alt={service.title} />
+            <img src={service.image} alt={service.title} loading="lazy" />
           </div>
           <div class="card-overlay">
+            <div class="card-overlay-content">
+              <span class={`card-icon icon-${service.icon}`}></span>
+              <h3 class="card-overlay-title">{service.title}</h3>
+            </div>
+          </div>
+          <div class="card-hover">
             <div class="card-content">
-              <h3 class="card-title">
-                <span class={`card-icon icon-${service.icon}`}></span>
-                <span>{service.title}</span>
-              </h3>
+              <span class={`card-icon icon-${service.icon}`}></span>
+              <h3 class="card-title">{service.title}</h3>
               <p class="card-description">{service.description}</p>
-              <a href={service.link} class="card-link">Read more</a>
+              <a href={service.link} class="card-link">Read More</a>
             </div>
           </div>
         </div>
@@ -70,7 +89,7 @@ const services = [
 <style>
   /* Welcome Section */
   .welcome-section {
-    background: #111111;
+    background: var(--color-blue);
     color: #fff;
     padding: 80px 0 120px 0;
   }
@@ -96,7 +115,7 @@ const services = [
 
   @media (min-width: 768px) {
     .welcome-inner {
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 1fr 1.5fr;
       gap: 60px;
     }
   }
@@ -112,10 +131,10 @@ const services = [
   }
 
   .welcome-subtitle {
-    font-family: "Jost", sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 400;
-    color: var(--primary-color);
+    color: var(--color-gold);
     text-transform: uppercase;
     letter-spacing: 2px;
     display: block;
@@ -123,7 +142,7 @@ const services = [
   }
 
   .welcome-title {
-    font-family: "Libre Baskerville", serif;
+    font-family: var(--font-title);
     font-size: 32px;
     font-weight: 700;
     color: #fff;
@@ -140,7 +159,7 @@ const services = [
   .welcome-section .small-border {
     width: 50px;
     height: 2px;
-    background: var(--primary-color);
+    background: var(--color-gold);
   }
 
   @media (min-width: 768px) {
@@ -155,22 +174,62 @@ const services = [
     }
   }
 
-  .welcome-content {
-    text-align: center;
+  /* Pillars List */
+  .pillars-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
   @media (min-width: 768px) {
-    .welcome-content {
-      text-align: left;
+    .pillars-list {
+      flex-direction: row;
+      gap: 30px;
     }
   }
 
-  .welcome-content p {
-    font-family: "Jost", sans-serif;
+  .pillar-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  @media (max-width: 767px) {
+    .pillar-item {
+      justify-content: center;
+    }
+  }
+
+  .pillar-icon {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pillar-icon i {
+    font-size: 18px;
+    color: #fff;
+  }
+
+  .pillar-text {
+    font-family: var(--font-body);
     font-size: 16px;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  @media (min-width: 768px) {
+    .pillar-text {
+      font-size: 18px;
+    }
   }
 
   /* Services Section */
@@ -211,7 +270,6 @@ const services = [
   .service-card {
     position: relative;
     overflow: hidden;
-    border-radius: 0;
     box-shadow: 2px 2px 30px 0px rgba(0, 0, 0, 0.2);
     aspect-ratio: 3 / 4;
   }
@@ -241,100 +299,161 @@ const services = [
     transform: scale(1.1);
   }
 
+  /* Default overlay with gold background */
   .card-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 70px;
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--color-gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: height 0.4s ease;
-    overflow: hidden;
+    transition: opacity 0.4s ease;
+    z-index: 2;
   }
 
   .service-card:hover .card-overlay {
-    height: 100%;
+    opacity: 0;
   }
 
-  .card-content {
-    padding: 20px 30px;
-    text-align: center;
+  .card-overlay-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 20px;
+  }
+
+  .card-overlay-content .card-icon {
+    font-size: 24px;
     color: #fff;
   }
 
-  .card-title {
-    font-family: "Libre Baskerville", serif;
+  .card-overlay-title {
+    font-family: var(--font-title);
     font-size: 18px;
     font-weight: 700;
     color: #fff;
     margin: 0;
+  }
+
+  /* Hover state - full overlay */
+  .card-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 3;
   }
 
-  .card-icon {
-    font-size: 24px;
-    color: var(--primary-color);
+  .service-card:hover .card-hover {
+    opacity: 1;
   }
 
-  /* Simple icon representations */
-  .icon-people::before {
-    content: "👥";
+  .card-content {
+    padding: 30px;
+    text-align: center;
+    color: #fff;
   }
 
-  .icon-home::before {
-    content: "🏠";
+  .card-content .card-icon {
+    font-size: 40px;
+    color: var(--color-gold);
+    display: block;
+    margin-bottom: 15px;
   }
 
-  .icon-law::before {
-    content: "⚖️";
+  .card-title {
+    font-family: var(--font-title);
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 15px 0;
   }
 
   .card-description {
-    font-family: "Jost", sans-serif;
+    font-family: var(--font-body);
     font-size: 15px;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.85);
-    margin: 20px 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
-  }
-
-  .service-card:hover .card-description {
-    opacity: 1;
-    transform: translateY(0);
+    margin: 0 0 25px 0;
   }
 
   .card-link {
     display: inline-block;
-    padding: 10px 25px;
-    background: var(--primary-color);
+    padding: 12px 30px;
+    background: var(--color-gold);
     color: #fff;
-    font-family: "Jost", sans-serif;
+    font-family: var(--font-body);
     font-size: 13px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-decoration: none;
-    border-radius: 30px;
-    transition: background 0.3s ease, opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  .service-card:hover .card-link {
-    opacity: 1;
-    transform: translateY(0);
+    transition: background 0.3s ease;
   }
 
   .card-link:hover {
     background: #fff;
-    color: #111;
+    color: var(--color-dark);
+  }
+
+  /* Icons using SVG data URIs for better quality */
+  .icon-stethoscope::before {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3'/%3E%3Cpath d='M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4'/%3E%3Ccircle cx='20' cy='10' r='2'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: brightness(0) invert(1);
+  }
+
+  .card-content .icon-stethoscope::before,
+  .card-overlay-content .icon-stethoscope::before {
+    filter: brightness(0) invert(1);
+  }
+
+  .card-content .icon-stethoscope::before {
+    filter: invert(73%) sepia(49%) saturate(1000%) hue-rotate(351deg) brightness(95%) contrast(89%);
+  }
+
+  .icon-hardhat::before {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z'/%3E%3Cpath d='M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5'/%3E%3Cpath d='M4 15v-3a6 6 0 0 1 6-6h0'/%3E%3Cpath d='M14 6h0a6 6 0 0 1 6 6v3'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: brightness(0) invert(1);
+  }
+
+  .card-content .icon-hardhat::before {
+    filter: invert(73%) sepia(49%) saturate(1000%) hue-rotate(351deg) brightness(95%) contrast(89%);
+  }
+
+  .icon-car::before {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2'/%3E%3Ccircle cx='7' cy='17' r='2'/%3E%3Cpath d='M9 17h6'/%3E%3Ccircle cx='17' cy='17' r='2'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: brightness(0) invert(1);
+  }
+
+  .card-content .icon-car::before {
+    filter: invert(73%) sepia(49%) saturate(1000%) hue-rotate(351deg) brightness(95%) contrast(89%);
   }
 </style>
