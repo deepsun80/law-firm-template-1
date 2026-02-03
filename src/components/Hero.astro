@@ -2,315 +2,386 @@
 
 ---
 
-<section class="hero" id="hero">
-  <div class="hero__container container">
-    <div class="hero__frame">
-      <!-- Side borders (animated) -->
-      <div class="hero__border-left"></div>
-      <div class="hero__border-right"></div>
-
-      <!-- Blue background at bottom -->
-      <div class="hero__bg-blue"></div>
-
-      <!-- Content -->
-      <div class="hero__content">
-        <h1
-          class="hero__title"
-          id="hero-title"
-          data-text="Defending Austin's Injured."
-        >
-        </h1>
-        <p class="hero__subtitle">Restoring Your Future.</p>
-
-        <div class="hero__image-container">
-          <img
-            src="/capitol-law-group-austin-lg.webp"
-            alt="Capitol Shield Law Group - Austin Texas"
-            class="hero__image"
-            width="1500"
-            height="560"
-            loading="eager"
-            fetchpriority="high"
-          />
-          <div class="hero__image-overlay">
-            <p class="hero__image-text">
-              The strategic advocacy 500+ local families trust when it matters
-              most.
-            </p>
-            <a href="#contact" class="hero__cta">Free Consultation</a>
-          </div>
+<!-- Hero Carousel -->
+<section class="hero-carousel" id="hero-carousel">
+  <div class="carousel-inner">
+    <!-- Slide 1 -->
+    <div class="carousel-slide active" data-bg="/images/slider/1.jpg">
+      <div class="slide-overlay"></div>
+      <div class="container">
+        <div class="slide-content">
+          <h4 class="slide-subtitle">Need Any Help?</h4>
+          <h1 class="slide-title">We Fight for Right</h1>
+          <p class="slide-text">Providing legal representation and counsel to safeguard your rights. Navigate complex legal challenges, and pursue justice with unwavering dedication.</p>
+          <a href="/practice-areas" class="btn-custom">Explore</a>
         </div>
       </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="carousel-slide" data-bg="/images/slider/2.jpg">
+      <div class="slide-overlay"></div>
+      <div class="container">
+        <div class="slide-content">
+          <h4 class="slide-subtitle">Law & Insurance Specialist</h4>
+          <h1 class="slide-title">Because We Care</h1>
+          <p class="slide-text">Providing legal representation and counsel to safeguard your rights. Navigate complex legal challenges, and pursue justice with unwavering dedication.</p>
+          <a href="/practice-areas" class="btn-custom">Explore</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel Indicators -->
+  <div class="carousel-indicators">
+    <button class="indicator active" data-slide="0" aria-label="Slide 1"></button>
+    <button class="indicator" data-slide="1" aria-label="Slide 2"></button>
+  </div>
+
+  <!-- Carousel Controls -->
+  <button class="carousel-control prev" aria-label="Previous slide">
+    <span class="control-icon">&lsaquo;</span>
+  </button>
+  <button class="carousel-control next" aria-label="Next slide">
+    <span class="control-icon">&rsaquo;</span>
+  </button>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h3 class="cta-text">Contact Us Now! Get a Free Consultation for Your Case.</h3>
+      <a href="/contact" class="btn-custom btn-dark">Make Appointment</a>
     </div>
   </div>
 </section>
 
 <script>
-  // Typewriter effect
-  const title = document.getElementById('hero-title');
-  const text = title?.dataset.text || '';
-  let index = 0;
+  // Carousel functionality
+  const slides = document.querySelectorAll('.carousel-slide');
+  const indicators = document.querySelectorAll('.indicator');
+  const prevBtn = document.querySelector('.carousel-control.prev');
+  const nextBtn = document.querySelector('.carousel-control.next');
+  let currentSlide = 0;
+  let autoplayInterval: ReturnType<typeof setInterval>;
 
-  function typeWriter() {
-    if (index < text.length) {
-      title!.textContent = text.slice(0, index + 1);
-      index++;
-      setTimeout(typeWriter, 50);
-    }
+  function showSlide(index: number) {
+    // Handle wraparound
+    if (index >= slides.length) index = 0;
+    if (index < 0) index = slides.length - 1;
+
+    // Update slides
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+
+    // Update indicators
+    indicators.forEach((indicator, i) => {
+      indicator.classList.toggle('active', i === index);
+    });
+
+    currentSlide = index;
   }
 
-  // Start typewriter aligned with other animations
-  setTimeout(typeWriter, 200);
+  function nextSlide() {
+    showSlide(currentSlide + 1);
+  }
+
+  function prevSlide() {
+    showSlide(currentSlide - 1);
+  }
+
+  function startAutoplay() {
+    autoplayInterval = setInterval(nextSlide, 5000);
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+
+  // Event listeners
+  prevBtn?.addEventListener('click', () => {
+    prevSlide();
+    stopAutoplay();
+    startAutoplay();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    nextSlide();
+    stopAutoplay();
+    startAutoplay();
+  });
+
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      showSlide(index);
+      stopAutoplay();
+      startAutoplay();
+    });
+  });
+
+  // Start autoplay
+  startAutoplay();
+
+  // Set background images
+  slides.forEach((slide) => {
+    const bg = slide.getAttribute('data-bg');
+    if (bg) {
+      (slide as HTMLElement).style.backgroundImage = `url(${bg})`;
+    }
+  });
 </script>
 
 <style>
-  .hero {
-    background-color: var(--color-white);
-    padding-top: var(--header-height);
-  }
-
-  .hero__container {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  /* Frame - no border, we use pseudo-elements for animated borders */
-  .hero__frame {
+  /* Hero Carousel */
+  .hero-carousel {
     position: relative;
-    background-color: var(--color-white);
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
     overflow: hidden;
-    border-bottom: 2px solid var(--color-gold);
   }
 
-  /* Animated side borders */
-  .hero__border-left,
-  .hero__border-right {
+  .carousel-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-slide {
     position: absolute;
     top: 0;
-    bottom: 0;
-    width: 2px;
-    background-color: #d1d5db;
-    transform: scaleY(0);
-    transform-origin: top;
-    animation: sideBorderGrow 0.6s ease-out 0.7s forwards;
-  }
-
-  .hero__border-left {
     left: 0;
-  }
-
-  .hero__border-right {
-    right: 0;
-  }
-
-  @keyframes sideBorderGrow {
-    to {
-      transform: scaleY(1);
-    }
-  }
-
-  /* Blue background at bottom - straight left, rounded right */
-  .hero__bg-blue {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 28%;
-    background-color: var(--color-blue);
-    border-radius: 0 100px 0 0;
-    z-index: 0;
-  }
-
-  /* Content */
-  .hero__content {
-    position: relative;
-    z-index: 1;
-    padding: 40px 24px 48px;
-    text-align: center;
-  }
-
-  .hero__title {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 6vw, 3.75rem);
-    font-weight: 700;
-    color: var(--color-slate);
-    line-height: 1.15;
-    margin-bottom: 12px;
-    min-height: 1.15em;
-  }
-
-  .hero__subtitle {
-    font-family: var(--font-sans);
-    font-size: clamp(1.1rem, 3vw, 1.7rem);
-    color: var(--color-gold);
-    font-style: italic;
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeIn 0.5s ease-out 1.8s forwards;
-  }
-
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
-  }
-
-  /* Image */
-  .hero__image-container {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    border-radius: 24px 24px 0 0;
-    overflow: hidden;
-    box-shadow: 0 -5px 40px rgba(0, 0, 0, 0.15);
-  }
-
-  .hero__image {
     width: 100%;
-    height: auto;
-    aspect-ratio: 1500 / 560;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    transform: scale(1.1);
-    animation: imageZoom 1.8s ease-out 0.2s forwards;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
   }
 
-  @keyframes imageZoom {
-    to {
-      transform: scale(1);
+  .carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .carousel-slide .container {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .slide-content {
+    max-width: 500px;
+    color: #fff;
+  }
+
+  .slide-subtitle {
+    font-family: "Jost", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    animation: fadeInUp 0.6s ease;
+  }
+
+  .slide-title {
+    font-family: "Libre Baskerville", serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.6s ease 0.1s both;
+  }
+
+  @media (min-width: 768px) {
+    .slide-title {
+      font-size: 48px;
     }
   }
 
-  /* Image overlay content */
-  .hero__image-overlay {
+  @media (min-width: 1024px) {
+    .slide-title {
+      font-size: 56px;
+    }
+  }
+
+  .slide-text {
+    font-family: "Jost", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    animation: fadeInUp 0.6s ease 0.2s both;
+  }
+
+  @media (min-width: 768px) {
+    .slide-text {
+      font-size: 18px;
+    }
+  }
+
+  .btn-custom {
+    display: inline-block;
+    padding: 12px 30px;
+    background: var(--primary-color);
+    color: #fff;
+    font-family: "Jost", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border: 2px solid var(--primary-color);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease 0.4s both;
+  }
+
+  .btn-custom:hover {
+    background: transparent;
+    color: #fff;
+  }
+
+  /* Carousel Indicators */
+  .carousel-indicators {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+  }
+
+  .indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .indicator.active,
+  .indicator:hover {
+    background: var(--primary-color);
+  }
+
+  /* Carousel Controls */
+  .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+  }
+
+  .carousel-control:hover {
+    background: var(--primary-color);
+  }
+
+  .carousel-control.prev {
+    left: 20px;
+  }
+
+  .carousel-control.next {
+    right: 20px;
+  }
+
+  .control-icon {
+    color: #fff;
+    font-size: 30px;
+    line-height: 1;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: var(--primary-color);
+    padding: 30px 0;
+  }
+
+  .cta-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .cta-inner {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    padding: 24px 20px;
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.6) 0%,
-      transparent 100%
-    );
+    justify-content: space-between;
+    gap: 20px;
     text-align: center;
   }
 
-  .hero__image-text {
-    font-family: var(--font-serif);
-    font-size: 0.9rem;
-    color: var(--color-white);
-    line-height: 1.5;
-    max-width: 400px;
-    margin-bottom: 16px;
-    opacity: 0;
-    animation: fadeIn 0.5s ease-out 2s forwards;
-  }
-
-  .hero__cta {
-    display: inline-block;
-    font-family: var(--font-serif);
-    font-size: 0.9rem;
-    font-weight: 700;
-    padding: 12px 28px;
-    background-color: var(--color-gold);
-    color: var(--color-slate);
-    border-radius: 4px;
-    transition:
-      background-color var(--transition-speed) ease,
-      transform var(--transition-speed) ease;
-    opacity: 0;
-    animation: fadeIn 0.5s ease-out 2.2s forwards;
-  }
-
-  .hero__cta:hover {
-    background-color: var(--color-gold-hover);
-    transform: translateY(-2px);
-  }
-
-  /* Tablet */
   @media (min-width: 768px) {
-    .hero__content {
-      padding: 56px 40px 64px;
-    }
-
-    .hero__subtitle {
-      margin-bottom: 40px;
-    }
-
-    .hero__image-container {
-      border-radius: 32px 32px 0 0;
-    }
-
-    .hero__bg-blue {
-      height: 32%;
-      border-radius: 0 140px 0 0;
-    }
-
-    .hero__image-overlay {
-      padding: 32px 24px;
-    }
-
-    .hero__image-text {
-      font-size: 1.5rem;
-      max-width: 450px;
-      margin-bottom: 20px;
-    }
-
-    .hero__cta {
-      font-size: 0.95rem;
-      padding: 14px 32px;
+    .cta-inner {
+      flex-direction: row;
+      text-align: left;
     }
   }
 
-  /* Desktop */
-  @media (min-width: 1024px) {
-    .hero {
-      min-height: 100vh;
-    }
+  .cta-text {
+    font-family: "Libre Baskerville", serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    margin: 0;
+  }
 
-    .hero__frame {
-      min-height: calc(100vh - var(--header-height));
-      display: flex;
-      flex-direction: column;
+  @media (min-width: 768px) {
+    .cta-text {
+      font-size: 22px;
     }
+  }
 
-    .hero__content {
-      padding: 64px 56px 0;
+  .btn-custom.btn-dark {
+    background: #111;
+    border-color: #111;
+    animation: none;
+    white-space: nowrap;
+  }
+
+  .btn-custom.btn-dark:hover {
+    background: #000;
+    border-color: #000;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
     }
-
-    .hero__subtitle {
-      margin-bottom: 64px;
-    }
-
-    .hero__image-container {
-      max-width: 1200px;
-      border-radius: 40px 40px 0 0;
-    }
-
-    .hero__bg-blue {
-      height: 35%;
-      border-radius: 0 180px 0 0;
-    }
-
-    .hero__image-overlay {
-      padding: 100px 32px;
-    }
-
-    .hero__image-text {
-      max-width: 500px;
-      margin-bottom: 24px;
-    }
-
-    .hero__cta {
-      font-size: 1rem;
-      padding: 16px 40px;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 </style>

@@ -1,0 +1,284 @@
+---
+
+---
+
+<section class="stats-section" id="stats">
+  <div class="stats-bg" style="background-image: url('/images/background/2.jpg');"></div>
+  <div class="stats-overlay"></div>
+
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stats-header">
+        <span class="stats-subtitle">Fun facts</span>
+        <h2 class="stats-title">What we did?</h2>
+        <div class="small-border"></div>
+        <p class="stats-desc">Trust in our expertise and let us champion your legal rights with skill and compassion.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">
+            <span class="counter" data-target="4500">0</span>
+          </div>
+          <h5 class="stat-label">Home Protected</h5>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number">
+            <span class="counter" data-target="16">0</span><span class="suffix">k</span>
+          </div>
+          <h5 class="stat-label">People Saved</h5>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number">
+            <span class="counter" data-target="4">0</span><span class="suffix">m</span>
+          </div>
+          <h5 class="stat-label">Money Saved</h5>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number">
+            <span class="counter" data-target="52">0</span><span class="suffix">k</span>
+          </div>
+          <h5 class="stat-label">Contract Signed</h5>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number">
+            <span class="counter" data-target="100">0</span><span class="suffix">+</span>
+          </div>
+          <h5 class="stat-label">Countries</h5>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number">
+            <span class="counter" data-target="2">0</span><span class="suffix">k</span>
+          </div>
+          <h5 class="stat-label">Staff Member</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Counter animation
+  function animateCounters() {
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+
+    counters.forEach(counter => {
+      const target = parseInt(counter.getAttribute('data-target') || '0');
+      const increment = target / speed;
+
+      const updateCount = () => {
+        const current = parseInt(counter.textContent || '0');
+        if (current < target) {
+          counter.textContent = Math.ceil(current + increment).toString();
+          setTimeout(updateCount, 10);
+        } else {
+          counter.textContent = target.toString();
+        }
+      };
+
+      updateCount();
+    });
+  }
+
+  // Intersection Observer to trigger animation when section is visible
+  const statsSection = document.getElementById('stats');
+  let hasAnimated = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasAnimated) {
+        hasAnimated = true;
+        animateCounters();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  if (statsSection) {
+    observer.observe(statsSection);
+  }
+</script>
+
+<style>
+  .stats-section {
+    position: relative;
+    padding: 80px 0;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .stats-section {
+      padding: 100px 0;
+    }
+  }
+
+  .stats-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  @media (max-width: 768px) {
+    .stats-bg {
+      background-attachment: scroll;
+    }
+  }
+
+  .stats-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .stats-section .container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .stats-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 50px;
+    align-items: start;
+  }
+
+  @media (min-width: 992px) {
+    .stats-inner {
+      grid-template-columns: 1fr 2fr;
+      gap: 60px;
+    }
+  }
+
+  .stats-header {
+    text-align: center;
+  }
+
+  @media (min-width: 992px) {
+    .stats-header {
+      text-align: left;
+    }
+  }
+
+  .stats-subtitle {
+    font-family: "Jost", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .stats-title {
+    font-family: "Libre Baskerville", serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+  }
+
+  @media (min-width: 768px) {
+    .stats-title {
+      font-size: 40px;
+    }
+  }
+
+  .stats-header .small-border {
+    width: 50px;
+    height: 2px;
+    background: var(--primary-color);
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 992px) {
+    .stats-header .small-border {
+      margin: 0 0 20px 0;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .stats-header .small-border {
+      margin: 0 auto 20px auto;
+    }
+  }
+
+  .stats-desc {
+    font-family: "Jost", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  @media (min-width: 768px) {
+    .stats-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  @media (min-width: 992px) {
+    .stat-item {
+      text-align: left;
+    }
+  }
+
+  .stat-number {
+    font-family: "Libre Baskerville", serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+
+  @media (min-width: 768px) {
+    .stat-number {
+      font-size: 48px;
+    }
+  }
+
+  .stat-number .suffix {
+    font-size: inherit;
+  }
+
+  .stat-label {
+    font-family: "Jost", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+</style>

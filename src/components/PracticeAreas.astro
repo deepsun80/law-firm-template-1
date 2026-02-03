@@ -1,86 +1,340 @@
 ---
-
+const services = [
+  {
+    icon: "people",
+    title: "Business Law",
+    description: "Explore innovative strategies, expert guidance, and tailored solutions to propel your success forward.",
+    image: "/images/services/1.jpg",
+    link: "#"
+  },
+  {
+    icon: "home",
+    title: "Family Law",
+    description: "Explore innovative strategies, expert guidance, and tailored solutions to propel your success forward.",
+    image: "/images/services/2.jpg",
+    link: "#"
+  },
+  {
+    icon: "law",
+    title: "Criminal Law",
+    description: "Explore innovative strategies, expert guidance, and tailored solutions to propel your success forward.",
+    image: "/images/services/3.jpg",
+    link: "#"
+  }
+];
 ---
 
-<section class="practice" id="expertise">
-  <div class="practice__container container">
-    <h2 class="practice__title">Our Expertise in Your Defense</h2>
-    <div class="practice__grid">
-      <div class="practice__card">
-        <h3 class="practice__card-title">Medical Negligence</h3>
-        <p class="practice__card-text">
-          Placeholder text for medical negligence practice area description.
-        </p>
+<!-- Welcome Section -->
+<section class="welcome-section" id="welcome">
+  <div class="container">
+    <div class="welcome-inner">
+      <div class="welcome-heading">
+        <span class="welcome-subtitle">Welcome</span>
+        <h2 class="welcome-title">
+          Reputation.<br />Respect. Result.
+        </h2>
+        <div class="small-border"></div>
       </div>
-      <div class="practice__card">
-        <h3 class="practice__card-title">Work Injuries</h3>
-        <p class="practice__card-text">
-          Placeholder text for work injuries practice area description.
-        </p>
-      </div>
-      <div class="practice__card">
-        <h3 class="practice__card-title">Auto Accidents</h3>
-        <p class="practice__card-text">
-          Placeholder text for auto accidents practice area description.
-        </p>
+      <div class="welcome-content">
+        <p>We understand that legal issues can be some of the most challenging and stressful experiences in life. Whether you are dealing with a complex family matter, facing criminal charges, or navigating the intricacies of business law, our mission is to provide you with comprehensive, compassionate, and expert legal guidance. Our seasoned attorneys are committed to the highest standard of legal representation tailored to meet your unique needs.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Service Cards Section -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="services-grid">
+      {services.map((service, index) => (
+        <div class="service-card" style={`--delay: ${0.2 + index * 0.2}s`}>
+          <div class="card-image">
+            <img src={service.image} alt={service.title} />
+          </div>
+          <div class="card-overlay">
+            <div class="card-content">
+              <h3 class="card-title">
+                <span class={`card-icon icon-${service.icon}`}></span>
+                <span>{service.title}</span>
+              </h3>
+              <p class="card-description">{service.description}</p>
+              <a href={service.link} class="card-link">Read more</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
 <style>
-  .practice {
-    background-color: var(--color-light-gray);
-    padding: 64px 0;
-  }
-
-  .practice__title {
-    font-family: var(--font-serif);
-    font-size: 1.5rem;
-    color: var(--color-slate);
-    text-align: center;
-    margin-bottom: 40px;
-  }
-
-  .practice__grid {
-    display: grid;
-    gap: 24px;
-  }
-
-  .practice__card {
-    background-color: var(--color-white);
-    padding: 32px 24px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  }
-
-  .practice__card-title {
-    font-family: var(--font-serif);
-    font-size: 1.1rem;
-    color: var(--color-slate);
-    margin-bottom: 12px;
-  }
-
-  .practice__card-text {
-    font-size: 0.9rem;
-    color: var(--color-slate);
-    opacity: 0.8;
-    line-height: 1.6;
+  /* Welcome Section */
+  .welcome-section {
+    background: #111111;
+    color: #fff;
+    padding: 80px 0 120px 0;
   }
 
   @media (min-width: 768px) {
-    .practice {
-      padding: 80px 0;
+    .welcome-section {
+      padding: 100px 0 150px 0;
     }
+  }
 
-    .practice__title {
-      font-size: 1.75rem;
+  .welcome-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .welcome-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .welcome-inner {
+      grid-template-columns: 1fr 2fr;
+      gap: 60px;
     }
+  }
 
-    .practice__grid {
+  .welcome-heading {
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .welcome-heading {
+      text-align: left;
+    }
+  }
+
+  .welcome-subtitle {
+    font-family: "Jost", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .welcome-title {
+    font-family: "Libre Baskerville", serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+  }
+
+  @media (min-width: 768px) {
+    .welcome-title {
+      font-size: 40px;
+    }
+  }
+
+  .welcome-section .small-border {
+    width: 50px;
+    height: 2px;
+    background: var(--primary-color);
+  }
+
+  @media (min-width: 768px) {
+    .welcome-section .small-border {
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .welcome-section .small-border {
+      margin: 0 auto;
+    }
+  }
+
+  .welcome-content {
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .welcome-content {
+      text-align: left;
+    }
+  }
+
+  .welcome-content p {
+    font-family: "Jost", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+  }
+
+  /* Services Section */
+  .services-section {
+    position: relative;
+    z-index: 100;
+    margin-top: -80px;
+    padding-bottom: 80px;
+  }
+
+  @media (min-width: 768px) {
+    .services-section {
+      margin-top: -100px;
+      padding-bottom: 100px;
+    }
+  }
+
+  .services-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  @media (min-width: 768px) {
+    .services-grid {
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      gap: 30px;
     }
+  }
+
+  /* Service Card */
+  .service-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: 2px 2px 30px 0px rgba(0, 0, 0, 0.2);
+    aspect-ratio: 3 / 4;
+  }
+
+  @media (min-width: 768px) {
+    .service-card {
+      aspect-ratio: 4 / 5;
+    }
+  }
+
+  .card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .service-card:hover .card-image img {
+    transform: scale(1.1);
+  }
+
+  .card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: height 0.4s ease;
+    overflow: hidden;
+  }
+
+  .service-card:hover .card-overlay {
+    height: 100%;
+  }
+
+  .card-content {
+    padding: 20px 30px;
+    text-align: center;
+    color: #fff;
+  }
+
+  .card-title {
+    font-family: "Libre Baskerville", serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .card-icon {
+    font-size: 24px;
+    color: var(--primary-color);
+  }
+
+  /* Simple icon representations */
+  .icon-people::before {
+    content: "👥";
+  }
+
+  .icon-home::before {
+    content: "🏠";
+  }
+
+  .icon-law::before {
+    content: "⚖️";
+  }
+
+  .card-description {
+    font-family: "Jost", sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 20px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+  }
+
+  .service-card:hover .card-description {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .card-link {
+    display: inline-block;
+    padding: 10px 25px;
+    background: var(--primary-color);
+    color: #fff;
+    font-family: "Jost", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background 0.3s ease, opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .service-card:hover .card-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .card-link:hover {
+    background: #fff;
+    color: #111;
   }
 </style>

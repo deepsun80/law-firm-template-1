@@ -1,64 +1,337 @@
 ---
-
+const testimonials = [
+  {
+    title: "Trustworthy lawyer",
+    text: "From the initial consultation to the final resolution, their professionalism and dedication were evident. They kept me informed every step of the way and fought tirelessly to protect my rights.",
+    author: "John D., Family Law Client"
+  },
+  {
+    title: "Quality lawyer service",
+    text: "Their attention to detail and strategic approach were instrumental in achieving a favorable outcome. I am forever grateful for their hard work and commitment.",
+    author: "Maria S., Criminal Defense Client"
+  },
+  {
+    title: "Top lawyer listed",
+    text: "They fought for my right to fair compensation and kept me informed throughout the process. Their expertise in personal injury law made a significant difference in my recovery.",
+    author: "Alex R., Personal Injury Client"
+  },
+  {
+    title: "Great services",
+    text: "They provided clear guidance on complicated issues. Their practical advice and thorough understanding of business law have been invaluable to my company's success.",
+    author: "Samantha T., Business Law Client"
+  },
+  {
+    title: "Highly recommend",
+    text: "The attorneys took the time to understand my concerns and crafted a comprehensive plan that gave me peace of mind. Their knowledge and professionalism were excellent.",
+    author: "Edward L., Estate Planning Client"
+  },
+  {
+    title: "Excellent support",
+    text: "They handled the negotiations and litigation with skill and ensured my interests were protected. I was impressed with their responsiveness and dedication to my case.",
+    author: "Linda W., Real Estate Law Client"
+  },
+  {
+    title: "Reliable lawyer",
+    text: "The attorneys were incredibly knowledgeable and provided practical solutions that resolved the conflict efficiently. Their expertise in employment law is unparalleled.",
+    author: "Michael B., Employment Law Client"
+  },
+  {
+    title: "Five-star services",
+    text: "Their thorough investigation and compelling defense in court resulted in a not-guilty verdict. I am eternally grateful for their expert legal representation.",
+    author: "David P., Criminal Defense Client"
+  }
+];
 ---
 
-<section class="testimonials" id="testimonials">
-  <div class="testimonials__container container">
-    <h2 class="testimonials__title">What Our Clients Say</h2>
-    <div class="testimonials__card">
-      <blockquote class="testimonials__quote">
-        "Capitol Shield changed our lives after my accident. Their dedication and local knowledge were incredible."
-      </blockquote>
-      <p class="testimonials__author">- Jane D., Austin Resident</p>
+<section class="testimonials-section" id="testimonials">
+  <div class="testimonials-bg" style="background-image: url('/images/background/3.jpg');"></div>
+  <div class="testimonials-overlay"></div>
+
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Testimonials</h2>
+      <div class="small-border"></div>
+    </div>
+
+    <div class="testimonials-carousel" id="testimonials-carousel">
+      <div class="carousel-track">
+        {testimonials.map((testimonial, index) => (
+          <div class={`testimonial-item ${index === 0 ? 'active' : ''}`} data-index={index}>
+            <div class="testimonial-content">
+              <i class="quote-icon">&#10077;</i>
+              <h3 class="testimonial-title">{testimonial.title}</h3>
+              <p class="testimonial-text">{testimonial.text}</p>
+              <div class="testimonial-author">{testimonial.author}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="carousel-nav">
+        <button class="nav-btn prev-btn" aria-label="Previous testimonial">&#8249;</button>
+        <div class="carousel-dots">
+          {testimonials.map((_, index) => (
+            <button class={`dot ${index === 0 ? 'active' : ''}`} data-index={index} aria-label={`Testimonial ${index + 1}`}></button>
+          ))}
+        </div>
+        <button class="nav-btn next-btn" aria-label="Next testimonial">&#8250;</button>
+      </div>
     </div>
   </div>
 </section>
 
+<script>
+  const carousel = document.getElementById('testimonials-carousel');
+  const items = carousel?.querySelectorAll('.testimonial-item');
+  const dots = carousel?.querySelectorAll('.dot');
+  const prevBtn = carousel?.querySelector('.prev-btn');
+  const nextBtn = carousel?.querySelector('.next-btn');
+
+  let currentIndex = 0;
+  let autoplayInterval: ReturnType<typeof setInterval>;
+
+  function showTestimonial(index: number) {
+    if (!items || !dots) return;
+
+    // Handle wraparound
+    if (index >= items.length) index = 0;
+    if (index < 0) index = items.length - 1;
+
+    items.forEach((item, i) => {
+      item.classList.toggle('active', i === index);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+
+    currentIndex = index;
+  }
+
+  function nextTestimonial() {
+    showTestimonial(currentIndex + 1);
+  }
+
+  function prevTestimonial() {
+    showTestimonial(currentIndex - 1);
+  }
+
+  function startAutoplay() {
+    autoplayInterval = setInterval(nextTestimonial, 5000);
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+
+  prevBtn?.addEventListener('click', () => {
+    prevTestimonial();
+    stopAutoplay();
+    startAutoplay();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    nextTestimonial();
+    stopAutoplay();
+    startAutoplay();
+  });
+
+  dots?.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      showTestimonial(index);
+      stopAutoplay();
+      startAutoplay();
+    });
+  });
+
+  startAutoplay();
+</script>
+
 <style>
-  .testimonials {
-    background-color: var(--color-blue);
-    padding: 64px 0;
-  }
-
-  .testimonials__title {
-    font-family: var(--font-serif);
-    font-size: 1.5rem;
-    color: var(--color-white);
-    text-align: center;
-    margin-bottom: 40px;
-  }
-
-  .testimonials__card {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .testimonials__quote {
-    font-family: var(--font-serif);
-    font-size: 1.1rem;
-    font-style: italic;
-    color: var(--color-white);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-
-  .testimonials__author {
-    font-size: 0.95rem;
-    color: var(--color-gold);
+  .testimonials-section {
+    position: relative;
+    padding: 80px 0;
+    color: #fff;
+    overflow: hidden;
   }
 
   @media (min-width: 768px) {
-    .testimonials {
-      padding: 80px 0;
+    .testimonials-section {
+      padding: 100px 0;
     }
+  }
 
-    .testimonials__title {
-      font-size: 1.75rem;
-    }
+  .testimonials-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
 
-    .testimonials__quote {
-      font-size: 1.25rem;
+  @media (max-width: 768px) {
+    .testimonials-bg {
+      background-attachment: scroll;
     }
+  }
+
+  .testimonials-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .testimonials-section .container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .section-title {
+    font-family: "Libre Baskerville", serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 20px 0;
+  }
+
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: 40px;
+    }
+  }
+
+  .small-border {
+    width: 50px;
+    height: 2px;
+    background: var(--primary-color);
+    margin: 0 auto;
+  }
+
+  /* Carousel */
+  .testimonials-carousel {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .carousel-track {
+    position: relative;
+    min-height: 300px;
+  }
+
+  .testimonial-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+
+  .testimonial-item.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .testimonial-content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    text-align: center;
+    transition: background 0.3s ease;
+  }
+
+  .testimonial-content:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .quote-icon {
+    font-size: 36px;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 20px;
+    font-style: normal;
+  }
+
+  .testimonial-title {
+    font-family: "Libre Baskerville", serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 15px 0;
+  }
+
+  .testimonial-text {
+    font-family: "Jost", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 20px 0;
+  }
+
+  .testimonial-author {
+    font-family: "Jost", sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Carousel Navigation */
+  .carousel-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+  }
+
+  .nav-btn:hover {
+    background: var(--primary-color);
+  }
+
+  .carousel-dots {
+    display: flex;
+    gap: 10px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .dot.active,
+  .dot:hover {
+    background: var(--primary-color);
   }
 </style>
