@@ -11,17 +11,21 @@
       <form class="contact-form" id="contact-form" name="contactForm">
         <div class="form-row">
           <div class="field-set">
+            <label for="name" class="visually-hidden">Your Name</label>
             <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required />
           </div>
           <div class="field-set">
+            <label for="email" class="visually-hidden">Your Email</label>
             <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" required />
           </div>
         </div>
         <div class="form-row">
           <div class="field-set">
+            <label for="phone" class="visually-hidden">Your Phone</label>
             <input type="tel" name="phone" id="phone" class="form-control" placeholder="Your Phone" required />
           </div>
           <div class="field-set">
+            <label for="case-type" class="visually-hidden">Case Type</label>
             <select name="case-type" id="case-type" class="form-control" required>
               <option value="" disabled selected>Select Case Type</option>
               <option value="medical-negligence">Medical Negligence</option>
@@ -32,6 +36,7 @@
           </div>
         </div>
         <div class="field-set">
+          <label for="message" class="visually-hidden">Message</label>
           <textarea name="message" id="message" class="form-control" placeholder="Tell us about your case..." rows="4"></textarea>
         </div>
         <div class="form-submit">
@@ -198,4 +203,5 @@
     text-align: center;
     margin: 20px 0 0 0;
   }
+
 </style>
